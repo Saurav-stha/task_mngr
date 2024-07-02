@@ -1,1 +1,32 @@
-console.log('Task Manager App')
+// console.log('Task Manager App')
+
+
+const express = require('express');
+const app = express();
+const tasks = require('./routes/tasks')
+
+
+//middleware
+
+app.use(express.json())
+
+
+//routes 
+
+app.get('/',(request,response) => {
+    response.send("HELLO SUMMONERS")
+})
+
+
+
+app.get('/yolo', (req, res) =>{
+    res.send('TASK MANAGERRR')
+})
+
+app.use('/api/v1/tasks', tasks)
+
+
+
+const port = 3000 // 
+
+app.listen(port, console.log(`server listeningg on port: ${port} ...`))
