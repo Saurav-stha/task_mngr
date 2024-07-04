@@ -7,7 +7,7 @@ const connectDB = (url) => {
             useNewUrlParser:true,
             useCreateIndex:true,
             useFindAndModify:false,
-            useUnifiedTopology:true
+            useUnifiedTopology:true,
         })
         .then(() => console.log('db connection successful vayo hai..'))
         .catch((e)=>console.log(e))
