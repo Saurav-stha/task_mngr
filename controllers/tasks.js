@@ -3,18 +3,22 @@ const Task = require("../models/Task")
 const getAllTasks = async (req, res) => {
     try{
         const tasks = await Task.find({})
-        res.status(200).json({ tasks })
+        return res.status(200).json({ tasks })
     }catch(err){
-        res.status(500).json({err})
+        return res.status(500).json({err})
+        return;
     }
-    res.send("get sabai taskss")
+    return res.send("get sabai taskss")
+    return;
 }
 const createTask = async(req, res) => {
     try{
         const task = await Task.create(req.body)
-        res.status(201).json({task})
+        return res.status(201).json({task})
+        return;
     }catch(err){
-        res.status(500).json({msg: err})
+        return res.status(500).json({msg: err})
+        return;
     }
     // res.send("create euta task by")
 
@@ -31,47 +35,52 @@ const getTask = async (req, res) => {
             return res.status(404).json({ msg: `task with id : ${taskID} xaina houu` })
         }
 
-        res.status(200).json({ task })
+        return res.status(200).json({ task })
+        return;
     }
     catch(err){
         // wrong syntax of id
-        res.status(500).json({msg: err})
+        return res.status(500).json({msg: err})
+        return;
 
     }
     // res.json({ tid:req.params.tid })
 }
 const deleteTask = async (req, res) => {
     try{
-        const {tid:taskId} = req.params
-        const task = await Task.findByIdAndDelete({_id:taskId})
+        const {tid:taskID} = req.params
+        const task = await Task.findByIdAndDelete({_id:taskID})
 
         if (!task){
-            return res.status(404).json({ msg: `Testo ${taskId} vako task xaina houu` })
+            return res.status(404).json({ msg: `Testo ${taskID} vako task xaina houu` })
         }
 
-        res.status(200).json({ task })
+        return res.status(200).json({ task })
+        return;
     }
     catch(err){
-        res.status(500).json({ err })
+        return res.status(500).json({ err })
+        return;
     }
     // res.send("del euta task")
 }
 const updateTask = async (req, res) => {
     try{
-        const {tid:taskId} = req.params
+        const {tid:taskID} = req.params
 
-        const task = await Task.findByIdAndUpdate({ _id: taskId}, req.body,{
+        const task = await Task.findByIdAndUpdate({ _id: taskID}, req.body,{
             new:true,
             runValidators:true
         } )
         
         if (!task){
-            return res.status(404).json({ msg: `Testo ${taskId} id vako task xaina yoi` })
+            return res.status(404).json({ msg: `Testo ${taskID} id vako task xaina yoi` })
         }
         
-        res.status(200).json({ task })
+        return res.status(200).json({ task })
+        return;
     }catch(e){
-        res.status(500).json({e})
+        return res.status(500).json({e})
     }
     // res.send("update euta task")
 }
